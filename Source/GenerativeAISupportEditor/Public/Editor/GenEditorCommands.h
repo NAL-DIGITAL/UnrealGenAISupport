@@ -7,7 +7,7 @@
 #include "Framework/Commands/Commands.h"
 
 /**
- * 
+ *
  */
 class FGenEditorCommands : public TCommands<FGenEditorCommands>
 {

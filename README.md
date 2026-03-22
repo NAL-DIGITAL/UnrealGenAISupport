@@ -27,7 +27,7 @@ community around it. It currently includes OpenAI's GPT, Deepseek R1, Claude Son
 , real-time APIs, Gemini, MCP, and Grok 3 APIs soon. The plugin will focus exclusively on APIs useful for
 game development, evals and interactive experiences. All suggestions and contributions are welcome. The plugin can also be used for setting up new evals and ways to compare models in game battlefields.
 
-Built and tested in Unreal Engine 5.4.4 
+Compatible with Unreal Engine 5.4 to 5.7+
 
 ## Current Progress:
 
@@ -91,19 +91,37 @@ Built and tested in Unreal Engine 5.4.4
     - Deepseek Reasoning API, R1 ✅
         - `deepseek-reasoning-r1` Model ✅
 - Alibaba (Dashscope):
-    - `qwen3.5-plus`, `qwen3.5-flash`, `qwen3-max`, `qwen-plus`, `qwen-flash`, `qwen-coder`, `qwen3-coder-plus` etc [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
-    - Multimodal API Support: `qwen-omni-turbo`, `qwen3-vl-plus`, `qwen3-vl-flash`, `qvq-max` etc [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
+    - `qwen3.5-plus`, `qwen3.5-flash`, `qwen3-max`, `qwen-plus`, `qwen-flash`, `qwen-coder`, `qwen3-coder-plus`, `qwen3-coder-flash`, `qwq-plus` etc [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
+    - Multimodal API Support: `qwen-omni-turbo`, `qwen-vl-max`, `qwen3-vl-plus`, `qwen3-vl-flash`, `qvq-max` etc [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
     - Image Generation API: `qwen-image`, `qwen-image-edit`, `wan2.2-t2i-plus` [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
     - Text to Speech: `qwen3-tts-flash`, `qwen-tts` [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
 - Moonshot AI:
-    - Moonshot Chat API: `kimi-k2.5`, `kimi-k2-thinking`, `kimi-k2-0905-preview` etc [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
+    - Moonshot Chat API: `kimi-k2.5`, `kimi-k2-thinking`, `kimi-k2-thinking-turbo`, `kimi-k2-0905-preview` etc [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
     - Multimodal Chat API: `kimi-latest`, `kimi-thinking-preview`, `moonshot-v1-8k-vision-preview` [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
 - Bytedance:
-    - `seed-2-0-mini`, `seed-1-8`, `seed-1-6`, `deepseek-v3-2`, `skylark-pro-250415` etc [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
+    - `seed-2-0-mini`, `seed-2-0-lite`, `seed-1-8`, `seed-1-6`, `seed-1-6-flash`, `deepseek-v3-2`, `skylark-pro-250415` etc [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
     - Multimodal API Support: `seed-1-6`, `skylark-vision` [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
     - Image Generation API: `seedream-4-0-250828`, `seedream-3-0-t2i`, `seededit-3-0-i2i` [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
-- 3D generative model APIs:
-    -  TripoSR by StabilityAI 🚧
+- ZhipuAI:
+    - `glm-5`, `glm-4.7`, `glm-4.7-flash`, `glm-4.6`, `glm-4.5`, `glm-4.5-flash` etc [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
+    - Multimodal API Support: `glm-4.6v`, `glm-4.6v-flash`, `glm-4.5v` [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
+- Baidu:
+    - `ernie-5.0-8k`, `ernie-4.5-8k`, `ernie-4.5-turbo-128k`, `ernie-x1-32k`, `ernie-x1-turbo-32k` etc [(available in "gen-ai pro china")](https://muddyterrain.com/t/genai-china-fab?utm_source=github.com&utm_medium=repo-free&utm_campaign=genai-china-plugin) ☑️ 🇨🇳
+- Meshy AI (3D Generation) - coming soon to Fab as "GenAI Model Generator":
+    - `meshy-6` - Text-to-3D (auto preview + refine), Image-to-3D, Retexture, Auto-Rigging 🛠️
+- Tripo AI (3D Generation) - coming soon to Fab as "GenAI Model Generator":
+    - `tripo-v2.5` - Text-to-3D, Image-to-3D 🛠️
+- Fal.ai - Hunyuan3D (3D Generation) - coming soon to Fab as "GenAI Model Generator":
+    - `hunyuan3d-v3.1-pro` (Tencent, open-source) - Text-to-3D 🛠️
+    - `hunyuan3d-v2.1` (Tencent, open-source) - Image-to-3D 🛠️
+- Fal.ai - TripoSR (3D Generation) - coming soon to Fab as "GenAI Model Generator":
+    - `triposr` (MIT, open-source) - Image-to-3D (fast, <1s) 🛠️
+- Fal.ai - Rodin (3D Generation) - coming soon to Fab as "GenAI Model Generator":
+    - `rodin-gen-2` (Hyper3D, proprietary) - Text-to-3D, Image-to-3D with PBR materials 🛠️
+- Fal.ai - Trellis 2 (3D Generation) - coming soon to Fab as "GenAI Model Generator":
+    - `trellis-2` (Microsoft, open-source) - Image-to-3D with PBR materials 🛠️
+- Google Gemini Texture Generation - coming soon to Fab as "GenAI Model Generator":
+    - `gemini-3.1-flash` - PBR texture maps (base color, normal, roughness, metallic), reference image generation 🛠️
 - Plugin Example Project 🛠️ [here](https://github.com/prajwalshettydev/unreal-llm-api-test-project)
 - Version Control Support
     - Perforce Support 🛠️
@@ -121,6 +139,7 @@ Built and tested in Unreal Engine 5.4.4
 
 - Clients Support ✅
     - Claude Desktop App Support ✅
+    - Claude Code CLI Support ✅
     - Cursor IDE Support ✅
     - OpenAI Operator API Support 🚧
 - Blueprints Auto Generation 🛠️
@@ -237,8 +256,9 @@ For test builds you can call the `GenSecureKey::SetGenAIApiKeyRuntime` either in
 > Please backup your project before using the MCP feature and use version control to track changes.
 
 
-##### 1. Install any one of the below clients: 
+##### 1. Install any one of the below clients:
 * Claude Desktop App from [here](https://claude.anthropic.com/).
+* Claude Code CLI from [here](https://docs.anthropic.com/en/docs/claude-code).
 * Cursor IDE from [here](https://www.cursor.com/).
 
 ##### 2. Setup the mcp config json:
@@ -259,6 +279,23 @@ The file will look something like this:
     }
 }
 ```
+###### For Claude Code CLI:
+`.mcp.json` file in your project root directory. The file will look something like this:
+```json
+{
+    "mcpServers": {
+      "unreal-handshake": {
+        "type": "stdio",
+        "command": "python",
+        "args": ["<your_project_directoy_path>/Plugins/GenerativeAISupport/Content/Python/mcp_server.py"],
+        "env": {
+          "UNREAL_HOST": "localhost",
+          "UNREAL_PORT": "9877"
+        }
+      }
+    }
+}
+```
 ###### For Cursor IDE:
 `.cursor/mcp.json` file in your project directory. The file will look something like this:
 ```json
@@ -269,15 +306,15 @@ The file will look something like this:
         "args": ["<your_project_directoy_path>/Plugins/GenerativeAISupport/Content/Python/mcp_server.py"],
         "env": {
           "UNREAL_HOST": "localhost",
-          "UNREAL_PORT": "9877" 
+          "UNREAL_PORT": "9877"
         }
       }
     }
 }
 ```
-##### 3. Install MCP[CLI] from with either pip or cv.
+##### 3. Install FastMCP.
 ```bash
-pip install mcp[cli]
+pip install fastmcp
 ```
 ##### 4. Enable python plugin in Unreal Engine. (Edit -> Plugins -> Python Editor Script Plugin)
 
@@ -574,7 +611,7 @@ This is currently work in progress. The plugin supports various clients like Cla
 
 #### If Autostart MCP server is enabled: (In plugin's settings)
 ##### 1. Open the Unreal Engine Editor.
-##### 2. Open the Claude Desktop App or Cursor IDE or Windsor. 
+##### 2. Open the Claude Desktop App, Claude Code CLI, or Cursor IDE. 
 
 That's it! You can now use the MCP features of the plugin.
 
