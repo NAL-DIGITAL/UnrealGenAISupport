@@ -1083,6 +1083,40 @@ def edit_widget_property(user_widget_path: str, widget_name: str, property_name:
         return f"An unexpected error occurred: {str(e)} Response: {response_str}"
 
 
+# Log Reading
+@mcp.tool()
+def read_unreal_log(lines: int = 50, filter: str = None) -> str:
+    """
+    Read recent Unreal Engine log entries. Use this to check for errors, warnings,
+    or debug output after executing commands or when troubleshooting issues.
+
+    Args:
+        lines: Number of recent log lines to return (default: 50, max recommended: 200)
+        filter: Optional substring filter to narrow results (e.g., "Error", "Warning",
+                "UWLevelPackager", "LogUWTransport", "LogTemp")
+
+    Returns:
+        Recent log entries from UE, optionally filtered
+    """
+    command = {
+        "type": "read_log",
+        "lines": lines,
+        "filter": filter
+    }
+    response = send_to_unreal(command)
+    if response.get("success"):
+        log_content = response.get("log", "")
+        total = response.get("total_lines", 0)
+        returned = response.get("returned_lines", 0)
+        header = f"--- UE Log ({returned}/{total} lines"
+        if filter:
+            header += f", filter='{filter}'"
+        header += f") ---\n"
+        return header + log_content
+    else:
+        return f"Failed to read log: {response.get('error', 'Unknown error')}"
+
+
 # Input
 @mcp.tool()
 def add_input_binding(action_name: str, key: str) -> str:

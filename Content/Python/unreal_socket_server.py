@@ -54,6 +54,7 @@ class CommandDispatcher:
             # Python and console
             "execute_python": python_commands.handle_execute_python,
             "execute_unreal_command": python_commands.handle_execute_unreal_command,
+            "read_log": python_commands.handle_read_log,
             
             # New
             "edit_component_property": actor_commands.handle_edit_component_property,
@@ -86,25 +87,18 @@ class CommandDispatcher:
             return {"success": False, "error": str(e)}
 
     def _handle_handshake(self, command: Dict[str, Any]) -> Dict[str, Any]:
-        """Built-in handler for handshake command"""
+        """Built-in handler for handshake command (runs in socket thread, no UE API calls)"""
         message = command.get("message", "")
         log.log_info(f"Handshake received: {message}")
-        
-        # Get Unreal Engine version
-        engine_version = unreal.SystemLibrary.get_engine_version()
-        
-        # Add connection and session information
-        connection_info = {
-            "status": "Connected",
-            "engine_version": engine_version,
-            "timestamp": time.time(),
-            "session_id": f"UE-{int(time.time())}"
-        }
-        
+
         return {
-            "success": True, 
+            "success": True,
             "message": f"Received: {message}",
-            "connection_info": connection_info
+            "connection_info": {
+                "status": "Connected",
+                "timestamp": time.time(),
+                "session_id": f"UE-{int(time.time())}"
+            }
         }
 
 

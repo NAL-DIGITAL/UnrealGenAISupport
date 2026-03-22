@@ -26,13 +26,7 @@ def start_mcp_server():
     """Start the external MCP server process"""
     global mcp_server_process
     try:
-        # Find our plugin's Python directory
-        plugin_python_path = None
-        for path in sys.path:
-            if "GenerativeAISupport/Content/Python" in path:
-                plugin_python_path = path
-                break
-
+        plugin_python_path = _find_plugin_python_path()
         if not plugin_python_path:
             log.log_error("Could not find plugin Python path")
             return False
@@ -72,38 +66,58 @@ def start_mcp_server():
     except Exception as e:
         log.log_error(f"Error starting MCP server: {e}")
         return False
+def _find_plugin_python_path():
+    """Find the plugin's Python directory in sys.path."""
+    needle = os.path.normpath("UnrealGenAISupport/Content/Python")
+    for path in sys.path:
+        if needle in os.path.normpath(path):
+            log.log_info(f"Found plugin Python path: {path}")
+            return path
+    log.log_error(f"Plugin path not found. Needle='{needle}', sys.path={sys.path}")
+    return None
+
+
+def _read_json_config():
+    """Read auto_start from socket_server_config.json as fallback."""
+    import json
+    plugin_path = _find_plugin_python_path()
+    if plugin_path:
+        cfg = os.path.join(plugin_path, "socket_server_config.json")
+        if os.path.exists(cfg):
+            try:
+                with open(cfg) as f:
+                    return json.load(f).get("auto_start_socket_server", True)
+            except Exception:
+                pass
+    return True
+
+
 def initialize_socket_server():
     """
     Initialize the socket server if auto-start is enabled in UE settings
     """
-    auto_start = False
-    
+    auto_start = True  # Default to True for MCP connectivity
+
     # Get settings from UE settings system
     try:
-        # First get the class reference
         settings_class = unreal.load_class(None, '/Script/GenerativeAISupportEditor.GenerativeAISupportSettings')
         if settings_class:
-            # Get the settings object using the class reference
             settings = unreal.get_default_object(settings_class)
-            
-            # Log available properties for debugging
-            log.log_info(f"Settings object properties: {dir(settings)}")
-            
-            # Check if auto-start is enabled
+
             if hasattr(settings, 'auto_start_socket_server'):
                 auto_start = settings.auto_start_socket_server
-                log.log_info(f"Socket server auto-start setting: {auto_start}")
+                log.log_info(f"Socket server auto-start setting (UE): {auto_start}")
             else:
-                log.log_warning("auto_start_socket_server property not found in settings")
-                # Try alternative property names that might exist
-                for prop in dir(settings):
-                    if 'auto' in prop.lower() or 'socket' in prop.lower() or 'server' in prop.lower():
-                        log.log_info(f"Found similar property: {prop}")
+                # Fallback to JSON config
+                auto_start = _read_json_config()
+                log.log_info(f"Socket server auto-start setting (JSON fallback): {auto_start}")
         else:
-            log.log_error("Could not find GenerativeAISupportSettings class")
+            auto_start = _read_json_config()
+            log.log_warning("GenerativeAISupportSettings not found, using JSON config")
     except Exception as e:
         log.log_error(f"Error reading UE settings: {e}")
-        log.log_info("Falling back to disabled auto-start")
+        auto_start = _read_json_config()
+        log.log_info(f"Falling back to JSON config: auto_start={auto_start}")
 
     # Auto-start if configured
     if auto_start:
@@ -111,13 +125,8 @@ def initialize_socket_server():
 
         # Start Unreal Socket Server
         try:
-            # Find our plugin's Python directory
-            plugin_python_path = None
-            for path in sys.path:
-                if "GenerativeAISupport/Content/Python" in path:
-                    plugin_python_path = path
-                    break
-    
+            plugin_python_path = _find_plugin_python_path()
+
             if plugin_python_path:
                 server_path = os.path.join(plugin_python_path, "unreal_socket_server.py")
     

@@ -201,6 +201,51 @@ def handle_execute_python(command: Dict[str, Any]) -> Dict[str, Any]:
                     pass
 
 
+def handle_read_log(command: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Handle a command to read recent Unreal Engine log entries.
+
+    Args:
+        command: The command dictionary containing:
+            - lines: Number of recent lines to return (default: 50)
+            - filter: Optional substring filter for log lines (e.g., "Error", "UWLevelPackager")
+
+    Returns:
+        Response dictionary with log content
+    """
+    try:
+        num_lines = command.get("lines", 50)
+        log_filter = command.get("filter", None)
+
+        log_path = os.path.join(unreal.Paths.project_log_dir(), "NALWorlds.log")
+        if not os.path.exists(log_path):
+            # Fallback to generic name
+            log_path = os.path.join(unreal.Paths.project_log_dir(), "Unreal.log")
+
+        if not os.path.exists(log_path):
+            return {"success": False, "error": f"Log file not found in {unreal.Paths.project_log_dir()}"}
+
+        with open(log_path, 'r', encoding='utf-8', errors='ignore') as f:
+            all_lines = f.readlines()
+
+        if log_filter:
+            filtered = [l for l in all_lines if log_filter in l]
+            lines = filtered[-num_lines:]
+        else:
+            lines = all_lines[-num_lines:]
+
+        return {
+            "success": True,
+            "log": "".join(lines),
+            "total_lines": len(all_lines),
+            "returned_lines": len(lines),
+            "log_path": log_path
+        }
+    except Exception as e:
+        log.log_error(f"Error reading log: {str(e)}", include_traceback=True)
+        return {"success": False, "error": str(e)}
+
+
 def handle_execute_unreal_command(command: Dict[str, Any]) -> Dict[str, Any]:
     """
     Handle a command to execute an Unreal Engine console command

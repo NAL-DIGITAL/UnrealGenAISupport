@@ -24,6 +24,11 @@
 			"Name": "GenerativeAISupportEditor",
 			"Type": "Editor",
 			"LoadingPhase": "PostEngineInit"
+		},
+		{
+			"Name": "UnrealGenAITests",
+			"Type": "DeveloperTool",
+			"LoadingPhase": "Default"
 		}
 	]
 }
